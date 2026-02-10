@@ -4,13 +4,6 @@ title: "[FR]: Please title this feature request"
 labels: "enhancement"
 body:
   - type: textarea
-    id: version
-    attributes:
-      label: Does the feature exist in the most recent commit?
-      description: We recommend using the latest commit from GitHub in your projects.
-    validations:
-      required: true
-  - type: textarea
     id: why
     attributes:
       label: Why do we need this feature?
