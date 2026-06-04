@@ -102,8 +102,7 @@
 
     /* Hero 区域 */
     .hero {
-      background: linear-gradient(180deg, #87ceeb 0%, #e0f6ff 40%, #87ceeb 60%, #4a90e2 100%),
-                  url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><defs><linearGradient id="skyGradient" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" style="stop-color:%23e8f4f8;stop-opacity:1"/><stop offset="40%" style="stop-color:%2387ceeb;stop-opacity:1"/><stop offset="100%" style="stop-color:%2356a3d4;stop-opacity:1"/></linearGradient><linearGradient id="oceanGradient" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" style="stop-color:%2372b5d1;stop-opacity:1"/><stop offset="50%" style="stop-color:%234a90e2;stop-opacity:1"/><stop offset="100%" style="stop-color:%23274a7a;stop-opacity:1"/></linearGradient></defs><rect width="1200" height="600" fill="url(%23skyGradient)"/><path d="M 0 350 Q 150 280 300 320 T 600 300 T 900 340 L 1200 300 L 1200 600 L 0 600 Z" fill="%235a7c84" opacity="0.4"/><path d="M 0 380 Q 200 320 400 360 T 800 350 L 1200 340 L 1200 600 L 0 600 Z" fill="%234a6b75" opacity="0.5"/><path d="M 0 400 Q 250 350 500 380 T 1000 370 L 1200 380 L 1200 600 L 0 600 Z" fill="%233b5569" opacity="0.6"/><ellipse cx="150" cy="180" rx="80" ry="60" fill="%23ffffff" opacity="0.15"/><ellipse cx="1050" cy="200" rx="90" ry="50" fill="%23ffffff" opacity="0.1"/></svg>');
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700"><defs><linearGradient id="skyGrad" x1="0%" y1="0%" x2="0%" y2="40%"><stop offset="0%" style="stop-color:%23e8f7ff;stop-opacity:1"/><stop offset="100%" style="stop-color:%23b3e5fc;stop-opacity:1"/></linearGradient><linearGradient id="oceanGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" style="stop-color:%2348a3c0;stop-opacity:1"/><stop offset="50%" style="stop-color:%232d7a96;stop-opacity:1"/><stop offset="100%" style="stop-color:%231a4d63;stop-opacity:1"/></linearGradient><filter id="shadow"><feGaussianBlur in="SourceGraphic" stdDeviation="3"/></filter></defs><rect width="1200" height="280" fill="url(%23skyGrad)"/><rect y="280" width="1200" height="420" fill="url(%23oceanGrad)"/><path d="M 0 280 L 120 240 L 180 260 L 240 220 L 300 250 L 360 210 L 420 240 L 480 200 L 540 230 L 600 190 L 660 220 L 720 180 L 780 210 L 840 170 L 900 200 L 960 160 L 1020 190 L 1080 150 L 1140 180 L 1200 140 L 1200 280 L 0 280 Z" fill="%238b6f47" opacity="0.9"/><path d="M 0 260 L 80 250 L 150 235 L 200 245 L 280 230 L 350 240 L 420 220 L 480 235 L 540 215 L 600 225 L 660 205 L 720 215 L 780 195 L 840 205 L 900 185 L 960 195 L 1020 175 L 1080 185 L 1140 165 L 1200 175 L 1200 280 L 0 280 Z" fill="%23a0825a" opacity="0.7"/><path d="M 0 320 Q 150 310 300 330 T 600 320 T 900 340 L 1200 330 L 1200 380 L 0 380 Z" fill="%236db5d9" opacity="0.4"/><path d="M 50 360 Q 200 350 350 370 T 650 360 T 1000 375 L 1150 365 L 1200 375 L 1200 450 L 0 450 Z" fill="%2359a8ce" opacity="0.5"/><path d="M 100 420 Q 250 410 400 430 T 750 415 T 1100 435 L 1200 425 L 1200 530 L 0 530 Z" fill="%2340859f" opacity="0.6"/><circle cx="100" cy="150" r="40" fill="%23ffffff" opacity="0.08"/><circle cx="1080" cy="170" r="50" fill="%23ffffff" opacity="0.06"/><path d="M 0 550 Q 50 540 100 550 T 200 540 T 300 550 T 400 540 T 500 550 T 600 540 T 700 550 T 800 540 T 900 550 T 1000 540 T 1100 550 T 1200 540 L 1200 570 Q 1150 560 1100 570 T 900 560 T 700 570 T 500 560 T 300 570 T 100 560 L 0 570 Z" fill="url(%23oceanGrad)" opacity="0.3" filter="url(%23shadow)"/></svg>');
       background-size: cover;
       background-position: center;
       background-attachment: fixed;
@@ -122,10 +121,9 @@
       right: 0;
       bottom: 0;
       background: linear-gradient(to bottom,
-        rgba(232, 244, 248, 0.2) 0%,
-        rgba(135, 206, 235, 0.1) 40%,
-        rgba(74, 144, 226, 0.3) 100%);
-      backdrop-filter: blur(0.5px);
+        rgba(0, 0, 0, 0) 0%,
+        rgba(0, 0, 0, 0.15) 50%,
+        rgba(0, 0, 0, 0.25) 100%);
       pointer-events: none;
     }
 
