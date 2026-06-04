@@ -1,0 +1,530 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>旅行指南 — 探索世界的隐秘角落</title>
+  <style>
+    /* 编辑/杂志风格调色板 */
+    :root {
+      --bg:      oklch(98% 0.004 95);
+      --surface: oklch(100% 0.002 95);
+      --fg:      oklch(20% 0.018 70);
+      --muted:   oklch(48% 0.012 70);
+      --border:  oklch(90% 0.006 95);
+      --accent:  oklch(52% 0.10 28);
+
+      --font-display: 'Iowan Old Style', 'Charter', Georgia, serif;
+      --font-body:    -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+      --font-mono:    'Courier New', monospace;
+
+      /* 响应式类型尺度 */
+      --text-xs:  clamp(12px, 2vw, 14px);
+      --text-sm:  clamp(14px, 2.2vw, 16px);
+      --text-base: clamp(16px, 2.5vw, 18px);
+      --text-lg:  clamp(18px, 3vw, 22px);
+      --text-xl:  clamp(24px, 4vw, 32px);
+      --text-2xl: clamp(32px, 6vw, 48px);
+      --text-3xl: clamp(48px, 8vw, 64px);
+
+      /* 间距 */
+      --spacing-xs:  clamp(8px, 1vw, 12px);
+      --spacing-sm:  clamp(12px, 2vw, 16px);
+      --spacing-md:  clamp(16px, 3vw, 24px);
+      --spacing-lg:  clamp(24px, 4vw, 32px);
+      --spacing-xl:  clamp(32px, 5vw, 48px);
+      --spacing-2xl: clamp(48px, 8vw, 72px);
+    }
+
+    /* 重置和基础样式 */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-body);
+      color: var(--fg);
+      background-color: var(--bg);
+      line-height: 1.6;
+      font-size: var(--text-base);
+    }
+
+    /* 排版 */
+    h1, h2, h3 {
+      font-family: var(--font-display);
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: var(--spacing-md);
+    }
+
+    h1 {
+      font-size: var(--text-3xl);
+      margin-bottom: var(--spacing-lg);
+    }
+
+    h2 {
+      font-size: var(--text-2xl);
+      margin-bottom: var(--spacing-md);
+    }
+
+    h3 {
+      font-size: var(--text-xl);
+    }
+
+    p {
+      margin-bottom: var(--spacing-md);
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: underline;
+      transition: opacity 0.2s;
+    }
+
+    a:hover {
+      opacity: 0.7;
+    }
+
+    /* 容器和布局 */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: var(--spacing-md);
+    }
+
+    /* Hero 区域 */
+    .hero {
+      background-color: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: var(--spacing-2xl) var(--spacing-md);
+      text-align: center;
+    }
+
+    .hero-title {
+      margin-bottom: var(--spacing-sm);
+      letter-spacing: -0.02em;
+    }
+
+    .hero-subtitle {
+      font-size: var(--text-lg);
+      color: var(--muted);
+      margin-bottom: var(--spacing-xl);
+      font-family: var(--font-body);
+      font-weight: 400;
+    }
+
+    .hero-cta {
+      font-size: var(--text-sm);
+      color: var(--accent);
+      text-decoration: none;
+      border-bottom: 2px solid var(--accent);
+      padding-bottom: 2px;
+      transition: all 0.3s;
+      display: inline-block;
+    }
+
+    .hero-cta:hover {
+      border-bottom-color: transparent;
+      opacity: 0.7;
+    }
+
+    /* 景点网格 */
+    .destinations-section {
+      padding: var(--spacing-2xl) var(--spacing-md);
+    }
+
+    .destinations-title {
+      text-align: center;
+      margin-bottom: var(--spacing-2xl);
+      font-size: var(--text-2xl);
+    }
+
+    .destinations-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--spacing-xl);
+      margin-bottom: var(--spacing-2xl);
+    }
+
+    /* 手机：单列 */
+    @media (min-width: 600px) {
+      .destinations-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    /* 平板/桌面：三列 */
+    @media (min-width: 1024px) {
+      .destinations-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    /* 景点卡片 */
+    .destination-card {
+      background-color: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 0;
+      overflow: hidden;
+      transition: all 0.3s;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    .destination-card:hover {
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+      border-color: var(--muted);
+    }
+
+    .destination-image {
+      width: 100%;
+      height: clamp(180px, 40vw, 280px);
+      background: linear-gradient(135deg, #e8e0d8 0%, #d4c9be 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+      font-family: var(--font-mono);
+      font-size: var(--text-sm);
+      text-align: center;
+      padding: var(--spacing-md);
+    }
+
+    .destination-content {
+      padding: var(--spacing-lg);
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .destination-name {
+      font-family: var(--font-display);
+      font-size: var(--text-lg);
+      font-weight: 700;
+      margin-bottom: var(--spacing-sm);
+      color: var(--fg);
+    }
+
+    .destination-meta {
+      display: flex;
+      gap: var(--spacing-md);
+      margin-bottom: var(--spacing-md);
+      flex-wrap: wrap;
+      font-size: var(--text-sm);
+      color: var(--muted);
+    }
+
+    .meta-item {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .meta-label {
+      font-weight: 600;
+      color: var(--fg);
+      opacity: 0.6;
+    }
+
+    .meta-value {
+      color: var(--accent);
+      font-weight: 500;
+    }
+
+    .destination-description {
+      font-size: var(--text-sm);
+      color: var(--muted);
+      line-height: 1.7;
+      flex-grow: 1;
+      margin-bottom: var(--spacing-md);
+    }
+
+    .destination-learn-more {
+      color: var(--accent);
+      text-decoration: none;
+      font-size: var(--text-sm);
+      font-weight: 600;
+      border-bottom: 1px solid var(--accent);
+      padding-bottom: 2px;
+      transition: all 0.2s;
+      display: inline-block;
+    }
+
+    .destination-learn-more:hover {
+      border-bottom-color: transparent;
+      opacity: 0.7;
+    }
+
+    /* 页脚 */
+    .footer {
+      background-color: var(--surface);
+      border-top: 1px solid var(--border);
+      padding: var(--spacing-xl) var(--spacing-md);
+      text-align: center;
+      color: var(--muted);
+      font-size: var(--text-sm);
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .footer-nav {
+      display: flex;
+      justify-content: center;
+      gap: var(--spacing-lg);
+      margin-bottom: var(--spacing-md);
+      flex-wrap: wrap;
+    }
+
+    .footer-nav a {
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-nav a:hover {
+      color: var(--accent);
+    }
+
+    .footer-divider {
+      height: 1px;
+      background-color: var(--border);
+      margin: var(--spacing-md) 0;
+    }
+
+    /* 响应式优化 */
+    @media (max-width: 599px) {
+      .container {
+        padding: var(--spacing-sm);
+      }
+
+      .hero {
+        padding: var(--spacing-xl) var(--spacing-sm);
+      }
+
+      .destinations-section {
+        padding: var(--spacing-xl) var(--spacing-sm);
+      }
+
+      .destination-content {
+        padding: var(--spacing-md);
+      }
+
+      .footer {
+        padding: var(--spacing-lg) var(--spacing-sm);
+      }
+
+      .footer-nav {
+        gap: var(--spacing-sm);
+      }
+    }
+
+    /* 打印样式（可选） */
+    @media print {
+      .hero-cta {
+        border-bottom: none;
+      }
+
+      .destination-card {
+        page-break-inside: avoid;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Hero 区域 -->
+  <section class="hero">
+    <div class="container">
+      <h1 class="hero-title">探索世界的隐秘角落</h1>
+      <p class="hero-subtitle">精选七大目的地，用旅行丈量人生的宽度</p>
+      <a href="#destinations" class="hero-cta">向下探索</a>
+    </div>
+  </section>
+
+  <!-- 景点推荐区 -->
+  <section class="destinations-section" id="destinations">
+    <div class="container">
+      <h2 class="destinations-title">七大精选目的地</h2>
+
+      <div class="destinations-grid">
+        <!-- 景点 1: 乔峰 -->
+        <article class="destination-card">
+          <div class="destination-image">图片占位符 — 瑞士</div>
+          <div class="destination-content">
+            <h3 class="destination-name">乔峰</h3>
+            <div class="destination-meta">
+              <div class="meta-item">
+                <span class="meta-label">消费:</span>
+                <span class="meta-value">¥¥¥</span>
+              </div>
+              <div class="meta-item">
+                <span class="meta-label">最佳时间:</span>
+                <span class="meta-value">6-9月</span>
+              </div>
+            </div>
+            <p class="destination-description">
+              瑞士北部最高峰，海拔 2970 米。登顶路线约 2-3 小时，山顶可俯瞰五大湖和周边阿尔卑斯山脉。天气晴朗时景观壮观。
+            </p>
+            <a href="#" class="destination-learn-more">了解更多</a>
+          </div>
+        </article>
+
+        <!-- 景点 2: 莱茵瀑布 -->
+        <article class="destination-card">
+          <div class="destination-image">图片占位符 — 瑞士</div>
+          <div class="destination-content">
+            <h3 class="destination-name">莱茵瀑布</h3>
+            <div class="destination-meta">
+              <div class="meta-item">
+                <span class="meta-label">消费:</span>
+                <span class="meta-value">¥¥</span>
+              </div>
+              <div class="meta-item">
+                <span class="meta-label">最佳时间:</span>
+                <span class="meta-value">4-10月</span>
+              </div>
+            </div>
+            <p class="destination-description">
+              欧洲最大瀑布，宽 150 米，落差 23 米。可乘坐观光船近距离观看瀑布，水雾迷蒙，体验大自然的磅礴力量。
+            </p>
+            <a href="#" class="destination-learn-more">了解更多</a>
+          </div>
+        </article>
+
+        <!-- 景点 3: 少女峰 -->
+        <article class="destination-card">
+          <div class="destination-image">图片占位符 — 瑞士</div>
+          <div class="destination-content">
+            <h3 class="destination-name">少女峰</h3>
+            <div class="destination-meta">
+              <div class="meta-item">
+                <span class="meta-label">消费:</span>
+                <span class="meta-value">¥¥¥</span>
+              </div>
+              <div class="meta-item">
+                <span class="meta-label">最佳时间:</span>
+                <span class="meta-value">5-9月</span>
+              </div>
+            </div>
+            <p class="destination-description">
+              海拔 3454 米的冰山之巅。搭乘齿轮火车登顶，欣赏 50+ 公里的阿莱奇冰川，拍摄阿尔卑斯群峰全景照片的绝佳位置。
+            </p>
+            <a href="#" class="destination-learn-more">了解更多</a>
+          </div>
+        </article>
+
+        <!-- 景点 4: 卢塞恩湖 -->
+        <article class="destination-card">
+          <div class="destination-image">图片占位符 — 瑞士</div>
+          <div class="destination-content">
+            <h3 class="destination-name">卢塞恩湖</h3>
+            <div class="destination-meta">
+              <div class="meta-item">
+                <span class="meta-label">消费:</span>
+                <span class="meta-value">¥¥</span>
+              </div>
+              <div class="meta-item">
+                <span class="meta-label">最佳时间:</span>
+                <span class="meta-value">全年</span>
+              </div>
+            </div>
+            <p class="destination-description">
+              瑞士中部风景最美的湖泊，清澈的湖水映照皮拉图斯山。湖畔的卢塞恩古城风韵独特，可乘船游湖或漫步历史长廊桥。
+            </p>
+            <a href="#" class="destination-learn-more">了解更多</a>
+          </div>
+        </article>
+
+        <!-- 景点 5: 因特拉肯 -->
+        <article class="destination-card">
+          <div class="destination-image">图片占位符 — 瑞士</div>
+          <div class="destination-content">
+            <h3 class="destination-name">因特拉肯</h3>
+            <div class="destination-meta">
+              <div class="meta-item">
+                <span class="meta-label">消费:</span>
+                <span class="meta-value">¥¥</span>
+              </div>
+              <div class="meta-item">
+                <span class="meta-label">最佳时间:</span>
+                <span class="meta-value">5-10月</span>
+              </div>
+            </div>
+            <p class="destination-description">
+              位于图恩湖和布里恩茨湖之间的度假小镇，是登山、跳伞、滑翔伞等户外极限运动的天堂。镇上商业发达，是探索伯尔尼高地的基地。
+            </p>
+            <a href="#" class="destination-learn-more">了解更多</a>
+          </div>
+        </article>
+
+        <!-- 景点 6: 采尔马特 -->
+        <article class="destination-card">
+          <div class="destination-image">图片占位符 — 瑞士</div>
+          <div class="destination-content">
+            <h3 class="destination-name">采尔马特</h3>
+            <div class="destination-meta">
+              <div class="meta-item">
+                <span class="meta-label">消费:</span>
+                <span class="meta-value">¥¥¥</span>
+              </div>
+              <div class="meta-item">
+                <span class="meta-label">最佳时间:</span>
+                <span class="meta-value">6-9月</span>
+              </div>
+            </div>
+            <p class="destination-description">
+              阿尔卑斯山下的经典度假小镇，以登山和滑雪著称。马特洪峰（Matterhorn）是瑞士象征，无数登山者的梦想目标，徒步路线众多。
+            </p>
+            <a href="#" class="destination-learn-more">了解更多</a>
+          </div>
+        </article>
+
+        <!-- 景点 7: 蒙特罗莎 -->
+        <article class="destination-card">
+          <div class="destination-image">图片占位符 — 瑞士</div>
+          <div class="destination-content">
+            <h3 class="destination-name">蒙特罗莎</h3>
+            <div class="destination-meta">
+              <div class="meta-item">
+                <span class="meta-label">消费:</span>
+                <span class="meta-value">¥¥¥</span>
+              </div>
+              <div class="meta-item">
+                <span class="meta-label">最佳时间:</span>
+                <span class="meta-value">7-9月</span>
+              </div>
+            </div>
+            <p class="destination-description">
+              瑞士境内最高峰，海拔 4634 米。需要一定的登山经验，路线徒步时间长，但顶峰景色壮阔，俯瞰意大利和法国边界。
+            </p>
+            <a href="#" class="destination-learn-more">了解更多</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 页脚 -->
+  <footer class="footer">
+    <div class="footer-content">
+      <nav class="footer-nav">
+        <a href="#hero">首页</a>
+        <a href="#destinations">目的地</a>
+        <a href="#">关于我们</a>
+        <a href="#">联系我们</a>
+      </nav>
+      <div class="footer-divider"></div>
+      <p>&copy; 2024 旅行指南。保留所有权利。</p>
+    </div>
+  </footer>
+</body>
+</html>
