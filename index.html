@@ -5,16 +5,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>旅行指南 — 探索世界的隐秘角落</title>
   <style>
-    /* 编辑/杂志风格调色板 */
+    /* 清新大气的蓝绿色系调色板 */
     :root {
-      --bg:      oklch(98% 0.004 95);
-      --surface: oklch(100% 0.002 95);
-      --fg:      oklch(20% 0.018 70);
-      --muted:   oklch(48% 0.012 70);
-      --border:  oklch(90% 0.006 95);
-      --accent:  oklch(52% 0.10 28);
+      --bg:      #f0f7fb;
+      --surface: #ffffff;
+      --fg:      #1a3a42;
+      --muted:   #5a7c84;
+      --border:  #d4e8f0;
+      --accent:  #3bb3d9;
+      --accent-secondary: #2a9fb8;
+      --success: #4caf89;
 
-      --font-display: 'Iowan Old Style', 'Charter', Georgia, serif;
+      --font-display: 'Segoe UI', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
       --font-body:    -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
       --font-mono:    'Courier New', monospace;
 
@@ -100,49 +102,93 @@
 
     /* Hero 区域 */
     .hero {
-      background-color: var(--surface);
-      border-bottom: 1px solid var(--border);
-      padding: var(--spacing-2xl) var(--spacing-md);
+      background: linear-gradient(135deg, #4dd0e1 0%, #29b6f6 50%, #1a76d2 100%);
+      color: #ffffff;
+      padding: clamp(60px, 12vw, 120px) var(--spacing-md);
       text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image:
+        radial-gradient(circle at 20% 80%, rgba(255,255,255,0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(255,255,255,0.1) 0%, transparent 50%);
+      pointer-events: none;
+    }
+
+    .hero > .container {
+      position: relative;
+      z-index: 1;
     }
 
     .hero-title {
       margin-bottom: var(--spacing-sm);
-      letter-spacing: -0.02em;
+      letter-spacing: -0.01em;
+      font-size: clamp(36px, 8vw, 64px);
+      font-weight: 700;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.1);
     }
 
     .hero-subtitle {
       font-size: var(--text-lg);
-      color: var(--muted);
+      color: rgba(255,255,255,0.95);
       margin-bottom: var(--spacing-xl);
       font-family: var(--font-body);
       font-weight: 400;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.1);
     }
 
     .hero-cta {
       font-size: var(--text-sm);
-      color: var(--accent);
+      color: #ffffff;
       text-decoration: none;
-      border-bottom: 2px solid var(--accent);
-      padding-bottom: 2px;
-      transition: all 0.3s;
+      background-color: rgba(255,255,255,0.2);
+      padding: 10px 20px;
+      border-radius: 24px;
+      transition: all 0.3s ease;
       display: inline-block;
+      border: 1px solid rgba(255,255,255,0.3);
+      font-weight: 600;
     }
 
     .hero-cta:hover {
-      border-bottom-color: transparent;
-      opacity: 0.7;
+      background-color: rgba(255,255,255,0.3);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
     }
 
     /* 景点网格 */
     .destinations-section {
       padding: var(--spacing-2xl) var(--spacing-md);
+      background: linear-gradient(180deg, #f0f7fb 0%, #ffffff 100%);
     }
 
     .destinations-title {
       text-align: center;
       margin-bottom: var(--spacing-2xl);
       font-size: var(--text-2xl);
+      color: var(--fg);
+      position: relative;
+      padding-bottom: var(--spacing-xl);
+    }
+
+    .destinations-title::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, var(--accent), transparent);
+      border-radius: 2px;
     }
 
     .destinations-grid {
@@ -170,31 +216,45 @@
     .destination-card {
       background-color: var(--surface);
       border: 1px solid var(--border);
-      border-radius: 0;
+      border-radius: 12px;
       overflow: hidden;
-      transition: all 0.3s;
+      transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
       display: flex;
       flex-direction: column;
       height: 100%;
+      box-shadow: 0 2px 8px rgba(26, 58, 66, 0.06);
     }
 
     .destination-card:hover {
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
-      border-color: var(--muted);
+      box-shadow: 0 12px 32px rgba(26, 58, 66, 0.12);
+      transform: translateY(-4px);
+      border-color: var(--accent);
     }
 
     .destination-image {
       width: 100%;
-      height: clamp(180px, 40vw, 280px);
-      background: linear-gradient(135deg, #e8e0d8 0%, #d4c9be 100%);
+      height: clamp(200px, 50vw, 300px);
+      background: linear-gradient(135deg, #c8e6f5 0%, #80deea 100%);
       display: flex;
       align-items: center;
       justify-content: center;
-      color: var(--muted);
+      color: var(--accent-secondary);
       font-family: var(--font-mono);
       font-size: var(--text-sm);
       text-align: center;
       padding: var(--spacing-md);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .destination-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .destination-image.placeholder {
+      color: rgba(26, 58, 66, 0.4);
     }
 
     .destination-content {
@@ -264,7 +324,7 @@
 
     /* 页脚 */
     .footer {
-      background-color: var(--surface);
+      background: linear-gradient(180deg, #ffffff 0%, #f0f7fb 100%);
       border-top: 1px solid var(--border);
       padding: var(--spacing-xl) var(--spacing-md);
       text-align: center;
@@ -358,7 +418,9 @@
       <div class="destinations-grid">
         <!-- 景点 1: 乔峰 -->
         <article class="destination-card">
-          <div class="destination-image">图片占位符 — 瑞士</div>
+          <div class="destination-image">
+            <img src="https://images.unsplash.com/photo-1531366936337-7c912a4589a7?w=600&h=400&fit=crop" alt="乔峰" onerror="this.style.display='none';this.parentElement.classList.add('placeholder');this.parentElement.textContent='图片加载中...'" />
+          </div>
           <div class="destination-content">
             <h3 class="destination-name">乔峰</h3>
             <div class="destination-meta">
@@ -380,7 +442,9 @@
 
         <!-- 景点 2: 莱茵瀑布 -->
         <article class="destination-card">
-          <div class="destination-image">图片占位符 — 瑞士</div>
+          <div class="destination-image">
+            <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&h=400&fit=crop" alt="莱茵瀑布" onerror="this.style.display='none';this.parentElement.classList.add('placeholder');this.parentElement.textContent='图片加载中...'" />
+          </div>
           <div class="destination-content">
             <h3 class="destination-name">莱茵瀑布</h3>
             <div class="destination-meta">
@@ -402,7 +466,9 @@
 
         <!-- 景点 3: 少女峰 -->
         <article class="destination-card">
-          <div class="destination-image">图片占位符 — 瑞士</div>
+          <div class="destination-image">
+            <img src="https://images.unsplash.com/photo-1454496522488-7a8e488e8606?w=600&h=400&fit=crop" alt="少女峰" onerror="this.style.display='none';this.parentElement.classList.add('placeholder');this.parentElement.textContent='图片加载中...'" />
+          </div>
           <div class="destination-content">
             <h3 class="destination-name">少女峰</h3>
             <div class="destination-meta">
@@ -424,7 +490,9 @@
 
         <!-- 景点 4: 卢塞恩湖 -->
         <article class="destination-card">
-          <div class="destination-image">图片占位符 — 瑞士</div>
+          <div class="destination-image">
+            <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&h=400&fit=crop" alt="卢塞恩湖" onerror="this.style.display='none';this.parentElement.classList.add('placeholder');this.parentElement.textContent='图片加载中...'" />
+          </div>
           <div class="destination-content">
             <h3 class="destination-name">卢塞恩湖</h3>
             <div class="destination-meta">
@@ -446,7 +514,9 @@
 
         <!-- 景点 5: 因特拉肯 -->
         <article class="destination-card">
-          <div class="destination-image">图片占位符 — 瑞士</div>
+          <div class="destination-image">
+            <img src="https://images.unsplash.com/photo-1531366936337-7c912a4589a7?w=600&h=400&fit=crop" alt="因特拉肯" onerror="this.style.display='none';this.parentElement.classList.add('placeholder');this.parentElement.textContent='图片加载中...'" />
+          </div>
           <div class="destination-content">
             <h3 class="destination-name">因特拉肯</h3>
             <div class="destination-meta">
@@ -468,7 +538,9 @@
 
         <!-- 景点 6: 采尔马特 -->
         <article class="destination-card">
-          <div class="destination-image">图片占位符 — 瑞士</div>
+          <div class="destination-image">
+            <img src="https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=600&h=400&fit=crop" alt="采尔马特" onerror="this.style.display='none';this.parentElement.classList.add('placeholder');this.parentElement.textContent='图片加载中...'" />
+          </div>
           <div class="destination-content">
             <h3 class="destination-name">采尔马特</h3>
             <div class="destination-meta">
@@ -490,7 +562,9 @@
 
         <!-- 景点 7: 蒙特罗莎 -->
         <article class="destination-card">
-          <div class="destination-image">图片占位符 — 瑞士</div>
+          <div class="destination-image">
+            <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&h=400&fit=crop" alt="蒙特罗莎" onerror="this.style.display='none';this.parentElement.classList.add('placeholder');this.parentElement.textContent='图片加载中...'" />
+          </div>
           <div class="destination-content">
             <h3 class="destination-name">蒙特罗莎</h3>
             <div class="destination-meta">
